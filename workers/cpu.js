@@ -19,7 +19,7 @@ function collectCPUTemp() {
 }
 
 function collectCPULoad() {
-  cpuLoad = os.loadavg()[0] * 100 / 4; // Load One
+  cpuLoad = os.loadavg()[0] * 100 / os.cpus().length; // Load One
 }
 
 function collectCPUFreq() {
