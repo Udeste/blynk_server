@@ -1,15 +1,19 @@
 {
   "name": "raspbetto-blynk",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Blynk controller for raspbetto",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": ["blynk", "nodejs", "monitoring", "resources", "javascript"],
   "author": "udeste",
+  "repository": {
+    "type": "GIT",
+    "url": "github.com:Udeste/blynk_server.git"
+  },
   "license": "MIT",
   "dependencies": {
-    "blynk-library": "^0.5.4",
-    "rpi-ws281x-native": "^0.9.0"
+    "blynk-library": "^0.5.4"
   }
 }
