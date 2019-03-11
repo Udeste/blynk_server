@@ -5,7 +5,10 @@ class ResourceCollector {
   constructor() {
     this.cpuFreq = 0;
     this.cpuTemp = 0;
-    this.cpuLoad = 0;
+    this.cpuPercent = 0;
+    this.loadOne = 0;
+    this.loadFive = 0;
+    this.loadFifteen = 0;
     this.ramUsage = 0;
     this.ramUsagePercent = 0;
     this.diskUsagePercent = 0;
@@ -22,9 +25,12 @@ class ResourceCollector {
     this.diskWorker = fork('./workers/disk.js', [refreshTime]);
 
     this.cpuWorker.on('message', data => {
-      this.cpuFreq = data.cpuFreq;
-      this.cpuTemp = data.cpuTemp;
-      this.cpuLoad = data.cpuLoad;
+      this.cpuFreq = data.cpuFreq || this.cpuFreq;
+      this.cpuPercent = data.cpuPercent || this.cpuPercent;
+      this.cpuTemp = data.cpuTemp || this.cpuTemp;
+      this.loadOne = data.loadOne || this.loadOne;
+      this.loadFive = data.loadFive || this.loadFive;
+      this.loadFifteen = data.loadFifteen || this.loadFifteen;
     });
 
     this.memWorker.on('message', data => {

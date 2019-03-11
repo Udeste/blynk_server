@@ -8,17 +8,17 @@ function collectDiskData() {
     if (!error) {
       let lines = stdout.toString().split('\n');
       diskUsagePercent = parseInt(lines[1].replace('%', ''));
+      sendData({ diskUsagePercent });
     }
   });
 }
 
-function sendData() {
-  process.send({ diskUsagePercent });
+function sendData(data) {
+  process.send(data);
 }
 
 const refreshRate = parseInt(process.argv[2]);
 
 setImmediate(collectDiskData);
-setInterval(collectDiskData, refreshRate * 6);
 
-setInterval(sendData, refreshRate / 2);
+setInterval(collectDiskData, refreshRate * 6);

@@ -22,20 +22,12 @@ class RaspbettoBlynk {
     /** Disk usage percent */
     this.v5 = new this.blynk.VirtualPin(5);
 
-    /** Led Colors */
+    /** CPU load one */
     this.v6 = new this.blynk.VirtualPin(6);
-    /** Number of active leds */
+    /** CPU load five */
     this.v7 = new this.blynk.VirtualPin(7);
-    /** Leds refresh rate */
+    /** CPU load fifteen */
     this.v8 = new this.blynk.VirtualPin(8);
-    /** Leds mode
-     * 1: OFF
-     * 2: CPU %
-     * 3: CPU Temp
-     * 4: MEM %
-     * 5: CPU Freq
-    */
-    this.v9 = new this.blynk.VirtualPin(9);
 
     this.setupEvents();
     this.setupVirtualWrites()
@@ -48,31 +40,22 @@ class RaspbettoBlynk {
       this.clearInterval();
       this.setupInterval();
     });
-
-    // SETUP LEDS COLOR
-    // this.v6.on('write', param => this.ledController.setFillColor(param));
-
-    // // SETUP NUMBER OF ACTIVE LEDS
-    // this.v7.on('write', param => this.ledController.setActivePixels(param[0]));
-    // this.v8.on('write', param => this.ledController.setRefreshRate(param[0]));
-    // this.v9.on('write', param => this.ledController.setLedsMode(param[0]));
   }
 
   syncPins() {
     console.log('Syncing Virtual Pins');
     this.blynk.syncVirtual(0);
-    this.blynk.syncVirtual(6);
-    this.blynk.syncVirtual(7);
-    this.blynk.syncVirtual(8);
-    this.blynk.syncVirtual(9);
   }
 
   sendData() {
     this.v1.write(this.resources.ramUsagePercent);
-    this.v2.write(this.resources.cpuLoad);
+    this.v2.write(this.resources.cpuPercent);
     this.v3.write(this.resources.cpuTemp);
     this.v4.write(this.resources.cpuFreq);
     this.v5.write(this.resources.diskUsagePercent);
+    this.v6.write(this.resources.loadOne);
+    this.v7.write(this.resources.loadFive);
+    this.v8.write(this.resources.loadFifteen);
   }
 
   setupEvents() {
